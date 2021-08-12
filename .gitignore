@@ -13,8 +13,8 @@
 *.opendb
 
 
-Room1/Content/StarterContent/
-room1/.vs/room1/v15/
+Game1/Content/StarterContent/
+Game1/.vs/Game1/v15/
 OldBinaries/
 OldIntermidiate/
 Release/
