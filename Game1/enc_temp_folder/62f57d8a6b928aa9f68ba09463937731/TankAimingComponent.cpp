@@ -59,11 +59,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		LaunchSpeed, 
 		false,
 		0,
-		0/*,
-		ESuggestProjVelocityTraceOption::TraceFullPath,    /// parametri pentru enable trace debug line
-		FCollisionResponseParams::DefaultResponseParam, 
-		TArray<AActor*>(), 
-		true*/);
+		0,
+		ESuggestProjVelocityTraceOption::TraceFullPath);
 
 
 	if (ok) {
