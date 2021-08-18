@@ -11,14 +11,15 @@
 /**
  * 
  */
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+UCLASS(meta = (BlueprintSpawnableComponent)) 
 class GAME1_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 
 public:
-	void Elevate(float degereesPerSecond);
-
+	//-1 max downward movement + 1 = max up
+	void Elevate(float relativeSpeed);
+	
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxDegreesPerSecond = 20; 
