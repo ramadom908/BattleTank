@@ -40,3 +40,28 @@ void ATankAIController::BeginPlay()
 	}
 
 }
+
+
+void ATankAIController::Tick(float DeltaTime)
+{
+
+	Super::Tick(DeltaTime);
+	
+	if (GetPlayerTank()) {
+
+		//TODO move towards the player
+
+		//aim towards the player
+		//tell the controlled tank to aim ai player location
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+		// fire if ready
+
+
+	}
+
+	
+	
+
+	//AimTowardsCrosshair();
+}

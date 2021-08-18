@@ -2,7 +2,8 @@
 
 #pragma once
 
-
+#include "Math/Color.h"
+#include "Engine.h"
 #include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
@@ -17,7 +18,31 @@ class GAME1_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-	ATank* GetControlledTank() const;
+	
 	void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
+private:
+	ATank* GetControlledTank() const;
+
+	//Move the barrel so that a shot would hit where the crosshair intersects the world
+	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector& hitLocation) const;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
+
+
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.334321;
  
 };
