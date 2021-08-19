@@ -34,8 +34,15 @@ void ATank::AimAt(FVector HitLocation)
 	
 }
 
+//This  is set in the editor-> tank blupreint-> event graph -> method name
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
+//This  is set in the editor-> tank blupreint-> event graph -> method name
+void ATank::SetTurretReference(UTankTurret * TurretToSet)
+{
+	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 

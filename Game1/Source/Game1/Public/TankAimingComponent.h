@@ -3,6 +3,7 @@
 #pragma once
 
 //#include "Kismet/GameplayStatics.h"
+#include "TankTurret.h"
 #include "Engine.h"
 #include "GameFramework/Actor.h"
 #include "CoreMinimal.h"
@@ -11,6 +12,7 @@
 
 //foward declaration
 class UTankBarrel; 
+
 
 // Holds barrels propreties
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -23,7 +25,9 @@ public:
 	UTankAimingComponent();
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	//TODO add settturretrefference
+
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 
 public:	
 	
@@ -34,5 +38,7 @@ private:
 	UTankBarrel * Barrel = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	UTankTurret* Turret = nullptr;
 		
 };
