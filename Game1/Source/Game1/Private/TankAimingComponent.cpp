@@ -26,7 +26,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 	//SuggestProjectileVelocity
 
-	bool okAimSolution = UGameplayStatics::SuggestProjectileVelocity(
+	/// parameters for  enable trace debug line  for debug 
+	/*bool okAimSolution = UGameplayStatics::SuggestProjectileVelocity(
 		this, 
 		OutLaunchVelocity, 
 		StartLocation, 
@@ -35,10 +36,25 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		false,
 		0,
 		0,
-		ESuggestProjVelocityTraceOption::TraceFullPath,    /// parameters for  enable trace debug line
+		ESuggestProjVelocityTraceOption::TraceFullPath,    
 		FCollisionResponseParams::DefaultResponseParam, 
 		TArray<AActor*>(), 
-		true);
+		true);*/
+
+	bool okAimSolution = UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed,
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace ); // DoNotTrace has to be here for the function to return true every frame
+
+
+
+
 
 	if (okAimSolution) {
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
@@ -63,11 +79,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaROtator = AimAsRotator - BarrelRotator;
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch); //TODO remove number
 
 }
 

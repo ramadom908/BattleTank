@@ -3,6 +3,7 @@
 #include "TankAIController.h"
 #include "Engine/World.h"
 #include "Engine.h"
+#include "Tank.h"
 
 ATank* ATankAIController::GetControlledTank() const
 {
