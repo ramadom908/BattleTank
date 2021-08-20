@@ -37,13 +37,31 @@ void ATank::AimAt(FVector HitLocation)
 
 void ATank::Fire()
 {
-	auto time = GetWorld()->GetTimeSeconds();
+
 
 	if (!Barrel) { return;  }
 
-	FVector location = Barrel->GetSocketLocation(FName("Projectile"));
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,location,FRotator(0));
+	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeinSeconds;
+
+	if (isReloaded) 
+	{
+
+		FVector location = Barrel->GetSocketLocation(FName("Projectile"));
+
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile")));
+
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = GetWorld()->GetTimeSeconds();
+
+	}
+
+	
+
 }
 
 //This  is set in the editor-> tank blupreint-> event graph -> method name
@@ -51,6 +69,8 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 	Barrel = BarrelToSet;
+
+
 }
 
 //This  is set in the editor-> tank blupreint-> event graph -> method name

@@ -5,41 +5,16 @@
 #include "Engine.h"
 #include "Tank.h"
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-	
-}
-
-ATank * ATankAIController::GetPlayerTank() const
-{
-	auto PlayerController = GetWorld()->GetFirstPlayerController()->GetPawn();
-	//UE_LOG(LogExec, Warning, TEXT("GetControlledTank() was called."));
-	//daca nu pun linia asta de aici unreal optimizeaza functia asta si nu o sa intre in ea in debug mode
-	return Cast<ATank>(PlayerController);
-	
-}
-
-
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto tank = GetControlledTank();
+	//auto tank = GetControlledTank();
 
-	if (tank) {
+	//if (tank) {
 
-		UE_LOG(LogTemp, Warning, TEXT("AI Tank name is %s"), *tank->GetName());
-	}
-
-	auto tank2 = GetPlayerTank();
-
-	if (tank2) {
-
-		UE_LOG(LogTemp, Warning, TEXT("AI Tank found player %s"), *tank2->GetName());
-	}
-
+	//	UE_LOG(LogTemp, Warning, TEXT("AI Tank name is %s"), *tank->GetName());
+	//}
 }
 
 
@@ -48,16 +23,20 @@ void ATankAIController::Tick(float DeltaTime)
 
 	Super::Tick(DeltaTime);
 	
-	if (GetPlayerTank()) {
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
+
+	if (PlayerTank) {
 
 		//TODO move towards the player
 
 		//aim towards the player
 		//tell the controlled tank to aim ai player location
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
 		// fire if ready
-
+		//TODO don't fire every frame
+		ControlledTank->Fire(); //TODO de aici trag tancurile AI
 
 	}
 
