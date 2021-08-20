@@ -34,6 +34,13 @@ void ATank::AimAt(FVector HitLocation)
 	
 }
 
+void ATank::Fire()
+{
+	auto time = GetWorld()->GetTimeSeconds();
+
+	UE_LOG(LogTemp, Warning, TEXT("Tank fires %f"), time);
+}
+
 //This  is set in the editor-> tank blupreint-> event graph -> method name
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
