@@ -2,7 +2,8 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
-
+#include "TankBarrel.h"
+#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -38,13 +39,18 @@ void ATank::Fire()
 {
 	auto time = GetWorld()->GetTimeSeconds();
 
-	UE_LOG(LogTemp, Warning, TEXT("Tank fires %f"), time);
+	if (!Barrel) { return;  }
+
+	FVector location = Barrel->GetSocketLocation(FName("Projectile"));
+
+	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,location,FRotator(0));
 }
 
 //This  is set in the editor-> tank blupreint-> event graph -> method name
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 //This  is set in the editor-> tank blupreint-> event graph -> method name
