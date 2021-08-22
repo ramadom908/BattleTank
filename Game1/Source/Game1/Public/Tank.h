@@ -26,7 +26,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	
-
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 
