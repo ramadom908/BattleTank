@@ -36,7 +36,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 		// fire if ready
 		//TODO don't fire every frame
-		ControlledTank->Fire(); //TODO de aici trag tancurile AI
+		//ControlledTank->Fire(); //TODO de aici trag tancurile AI
 
 	}
 
