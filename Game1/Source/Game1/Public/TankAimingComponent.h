@@ -41,16 +41,19 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
-
+	virtual void BeginPlay() override;
 	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
-	EFiringStatus FiringState = EFiringStatus::Ready;
+	EFiringStatus FiringState = EFiringStatus::Reloading;
 
 
 private:
 	UTankAimingComponent();
 	void MoveBarrelTowards(FVector AimDirection);
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	bool IsBarrelMoving();
 
 	UTankTurret* Turret = nullptr;
 	UTankBarrel * Barrel = nullptr;
@@ -64,5 +67,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	float LastFireTime = 0;
+
+	FVector AimDirection;
 		
 };
