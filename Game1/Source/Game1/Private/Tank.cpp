@@ -1,10 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankMovementComponent.h"
+
 
 // Sets default values
 ATank::ATank()
@@ -17,24 +16,23 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-
-void ATank::AimAt(FVector HitLocation)
-{
-
-	if (!ensure(TankAimingComponent)) { return; }
-	//UE_LOG(LogTemp, Warning, TEXT("aim solve found 99"));
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed); //, LaunchSpeed	
 
 }
+
+//
+//void ATank::AimAt(FVector HitLocation)
+//{
+//
+//	if (!ensure(TankAimingComponent)) { return; }
+//	//UE_LOG(LogTemp, Warning, TEXT("aim solve found 99"));
+//	TankAimingComponent->AimAt(HitLocation, LaunchSpeed); //, LaunchSpeed	
+//
+//}
+
 
 void ATank::Fire()
 {
-
-
 	if (!ensure(Barrel)) { return;  }
-
 
 	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeinSeconds;
 

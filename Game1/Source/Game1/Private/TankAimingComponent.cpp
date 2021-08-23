@@ -14,7 +14,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	
 	if (!ensure(Barrel)) { return;  }
@@ -52,18 +52,14 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (okAimSolution) {
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		//UE_LOG(LogTemp, Warning, TEXT("aiming  at : %s"), *AimDirection.ToString());
-		MoveBarrelTowards(AimDirection);
-		
+		MoveBarrelTowards(AimDirection);	
 		//MoveBarrel();
 	}
 	else {
 		auto time = GetWorld()->GetTimeSeconds();
 
-		UE_LOG(LogTemp, Warning, TEXT("55no aim solve found %f"), time);
-		
-	}
-
-	
+		UE_LOG(LogTemp, Warning, TEXT("55no aim solve found %f"), time);		
+	}	
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel * BarreltoSet, UTankTurret * TurrettoSet)

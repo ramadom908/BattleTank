@@ -9,10 +9,9 @@
 #include "Tank.generated.h"
 
 //forward declarations class
-class UTankAimingComponent;
 class UTankBarrel;
 class AProjectile;
-class UTankMovementComponent;
+//class UTankMovementComponent;
 
 UCLASS()
 class GAME1_API ATank : public APawn
@@ -23,18 +22,14 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 	virtual void BeginPlay() override;
-protected:
-	// Called when the game starts or when spawned
-	
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
+
+	/*UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;*/ //TODO remove?
 
 public:	
-	void AimAt(FVector HitLocation);
+	
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
@@ -43,7 +38,7 @@ public:
 
 
 private:
-
+	//TODO remove launchspeed
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 7000.0;
 
