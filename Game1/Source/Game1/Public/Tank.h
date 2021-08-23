@@ -38,30 +38,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel * BarrelToSet);
+	/*UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UTankBarrel * BarrelToSet);*/
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret * TurretToSet);
 
 private:
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
-
-	
-
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 7000.0;
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeinSeconds = 3.f;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	
-	UTankBarrel* Barrel = nullptr; //local barrel reference for spawning projectile
+	UTankBarrel* Barrel = nullptr; //local barrel reference for spawning projectile TODO remove
 
 	float LastFireTime=0;
 

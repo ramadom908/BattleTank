@@ -23,9 +23,6 @@ enum class EFiringStatus: uint8
 //foward declaration
 class UTankBarrel; 
 
-
-
-
 // Holds barrels propreties
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GAME1_API UTankAimingComponent : public UActorComponent
@@ -35,26 +32,22 @@ class GAME1_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	void SetTurretReference(UTankTurret* TurretToSet);
-
-
 public:	
 	
+	
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarreltoSet, UTankTurret* TurrettoSet);
+
 	void AimAt(FVector HitLocation, float launchSpeed);
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+	EFiringStatus FiringState = EFiringStatus::Ready;
 
 
 private:
-	UTankBarrel * Barrel = nullptr;
-
 	void MoveBarrelTowards(FVector AimDirection);
-
 	UTankTurret* Turret = nullptr;
-
-protected:
-	UPROPERTY(BlueprintReadOnly, Category = Setup)
-	EFiringStatus FiringState = EFiringStatus::Aiming;
+	UTankBarrel * Barrel = nullptr;
 		
 };
