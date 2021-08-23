@@ -23,11 +23,17 @@ public:
 	//TODO find max force per track
 	UPROPERTY(EditDefaultsOnly)
 	float TrackMaxDrivingForce = 40000000; // assume 40 tone tank and 1g acceleration
-	//UTankTrack();
+	UTankTrack();
+	virtual void BeginPlay() override;
 	//virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	void ApplySidewaysForce();
+	void DriveTrack();
 
-private:
 	
+private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
+	float CurrentThrottle=0;
 	
 };
