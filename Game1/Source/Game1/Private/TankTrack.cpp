@@ -28,7 +28,7 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("I'm hit,,,, i'm hit"));
+	//UE_LOG(LogTemp, Warning, TEXT("I'm hit,,,, i'm hit"));
 
 	DriveTrack();
 	ApplySidewaysForce();

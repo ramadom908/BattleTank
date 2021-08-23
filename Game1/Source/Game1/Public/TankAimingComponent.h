@@ -13,7 +13,7 @@
 UENUM()
 enum class EFiringStatus: uint8
 {
-	Default,
+	Default, //out of ammo
 	Reloading,
 	Aiming,
 	Ready
@@ -42,10 +42,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 	virtual void BeginPlay() override;
-	
+	EFiringStatus GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int getRoundsLeft()const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	EFiringStatus FiringState = EFiringStatus::Reloading;
+	
+	
 
 
 private:
@@ -68,7 +74,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	float LastFireTime = 0;
-
 	FVector AimDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int RoundsLeft = 2;
 		
 };

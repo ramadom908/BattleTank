@@ -36,6 +36,11 @@ void ATankAIController::Tick(float DeltaTime)
 
 		// fire if ready
 		//TODO don't fire every frame
-		//AimingComponent->Fire(); //TODO de aici trag tancurile AI
+		
+		if (AimingComponent->GetFiringState() == EFiringStatus::Ready) {
+			AimingComponent->Fire(); //TODO de aici trag tancurile AI
+		}
+
+		
 
 }
