@@ -9,14 +9,6 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
-
-	//auto tank = GetControlledTank();
-
-	//if (tank) {
-
-	//	UE_LOG(LogTemp, Warning, TEXT("AI Tank name is %s"), *tank->GetName());
-	//}
 }
 
 
