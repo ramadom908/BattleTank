@@ -53,6 +53,7 @@ private:
 	void MoveBarrelTowards(FVector AimDirection);
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	
 	bool IsBarrelMoving();
 
 	UTankTurret* Turret = nullptr;
