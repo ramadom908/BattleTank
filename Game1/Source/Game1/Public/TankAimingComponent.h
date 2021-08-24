@@ -66,10 +66,10 @@ private:
 	UTankBarrel * Barrel = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 7000.0;
+	float LaunchSpeed = 17000.0;
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
-	float ReloadTimeinSeconds = 3.f;
+	float ReloadTimeinSeconds = 0.1f;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
@@ -77,6 +77,6 @@ private:
 	FVector AimDirection;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 RoundsLeft = 10;
+	int32 RoundsLeft = 40;
 		
 };
