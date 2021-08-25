@@ -71,8 +71,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeinSeconds = 0.1f;
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	int32 NrOfBarrels = 1;
+
+	UPROPERTY(EditAnywhere, Category = "Firing")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
 	float LastFireTime = 0;
 	FVector AimDirection;
 

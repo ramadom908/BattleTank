@@ -4,6 +4,7 @@
 #include "TankPlayerController.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 //#include "GameFramework/HUD.h"
 
 
@@ -16,6 +17,28 @@ void ATankPlayerController::BeginPlay()
 	
 	FoundAimingComponent(AimingComponent);
 }
+
+
+void ATankPlayerController::SetPawn(APawn* InPawn) {
+
+	Super::SetPawn(InPawn);
+
+	if (InPawn) {
+
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
+	}
+
+}
+
+void ATankPlayerController::OnPossessedTankDeath() {
+
+	StartSpectatingOnly();	
+}
+
+
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
@@ -77,7 +100,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	auto startLocation = PlayerCameraManager->GetCameraLocation();
 	FVector endLocation = startLocation + (LookDirection* LineTraceRange);
 	
-	if (GetWorld()->LineTraceSingleByChannel(HitResult, startLocation, endLocation, ECollisionChannel::ECC_Visibility)) {
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, startLocation, endLocation, ECollisionChannel::ECC_Camera)) {
 		HitLocation = HitResult.Location;
 	//Draw debug a red trace in the world to visualise
 	//FColor color = { 255, 0, 0, 0 }; // red

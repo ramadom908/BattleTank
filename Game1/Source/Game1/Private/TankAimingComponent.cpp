@@ -137,6 +137,48 @@ void UTankAimingComponent::Fire()
 		RoundsLeft -=1;
 	}
 
+	if(NrOfBarrels == 3) {
+		if (FiringState == EFiringStatus::Aiming || FiringState == EFiringStatus::Ready)
+		{
+
+			FVector location1 = Barrel->GetSocketLocation(FName("Projectile1"));
+			if (!ensure(Barrel)) { return; }
+			if (!ensure(ProjectileBlueprint)) { return; }
+			auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile1")),
+				Barrel->GetSocketRotation(FName("Projectile1")));
+
+
+			Projectile->LaunchProjectile(LaunchSpeed);
+			LastFireTime = GetWorld()->GetTimeSeconds();
+
+			RoundsLeft -= 1;
+		}
+
+		if (FiringState == EFiringStatus::Aiming || FiringState == EFiringStatus::Ready)
+		{
+
+			FVector location2 = Barrel->GetSocketLocation(FName("Projectile2"));
+
+			if (!ensure(Barrel)) { return; }
+			if (!ensure(ProjectileBlueprint)) { return; }
+			auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile2")),
+				Barrel->GetSocketRotation(FName("Projectile2")));
+
+
+			Projectile->LaunchProjectile(LaunchSpeed);
+			LastFireTime = GetWorld()->GetTimeSeconds();
+
+			RoundsLeft -= 1;
+		}
+
+	}
+
+	
+
 }
 
 
