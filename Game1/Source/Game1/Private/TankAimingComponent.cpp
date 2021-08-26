@@ -51,7 +51,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::BeginPlay()
 {
-
+	Super::BeginPlay();
 	LastFireTime = GetWorld()->GetTimeSeconds();
 }
 
@@ -124,7 +124,7 @@ void UTankAimingComponent::Fire()
 
 		FVector location = Barrel->GetSocketLocation(FName("Projectile"));
 		if (!ensure(Barrel )) { return; }
-		if (!ensure(ProjectileBlueprint)) { return; }
+		if (!ensure(ProjectileBlueprint)) { return; } //(!ensure(ProjectileBlueprint))
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
@@ -185,12 +185,12 @@ void UTankAimingComponent::Fire()
 
 
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector TargetAimDirection)
 {
 	if (!ensure(Barrel && Turret)) { return; }
 
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
-	auto AimAsRotator = AimDirection.Rotation();
+	auto AimAsRotator = TargetAimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch); 
